@@ -1,7 +1,8 @@
 #coding=utf-8
-#2017.4.24
+#2017.6.13
 #By JerCas
 
+# 导入plist文件解析模块
 import plistlib
 
 def findDuplicates(fileName):
@@ -44,13 +45,13 @@ def findDuplicates(fileName):
         # 重复次数大于1，说明有重复
         if value[1]>1:
             # 加入重复声轨列表中
-            dups.append(value[1],key)
+            dups.append((value[1],key))
         # 将重复声轨信息存储到文本信息中(有重复信息的情况下)
-            if (len(dups)>0):
-                print("Found "+len(dups)+" duplicates. Track names saved to dup.txt")
-            else:
-                print("No duplicate tracks found!")
-            f = open("dups.txt","w")
-            for val in dups:
-                f.write("[" + val[0] + "]" + + val[1] + "\n")
-            f.close
+    if len(dups)>0:
+        print("Found "+str(len(dups))+" duplicates. Track names saved to dup.txt")
+    else:
+        print("No duplicate tracks found!")
+    f = open("dups.txt","w")
+    for val in dups:
+        f.write("[" + val[0] + "]" + + val[1] + "\n")
+    f.close()
