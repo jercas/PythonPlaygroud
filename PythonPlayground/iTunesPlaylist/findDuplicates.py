@@ -13,6 +13,7 @@ def findDuplicates(fileName):
     plist = plistlib.readPlist(fileName)
     # 从播放列表字典中获取Tracks健的值——声轨字典存为tracks
     tracks = plist['Tracks']
+
     # 创建存储重复声轨的空字典
     trackNames = {}
     # 循环迭代声轨字典，获取声轨名、声轨长度，trackId-key track-value（tracks是一个字典字典，而其value是一个字典）
@@ -35,7 +36,7 @@ def findDuplicates(fileName):
                     # 第一次遇到该音轨，将（duration,count）作为元祖值存入重复声轨字典的对应key-name中
                     trackNames[name] = (duration,1)
         except:
-            # 忽略没有定义名称的音轨
+            # 忽略未命名音轨
             pass
 
     # 将重复音轨作为一个（name，count）元祖存储在列表中
