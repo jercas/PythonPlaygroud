@@ -36,13 +36,13 @@ def findCommonTrakcs(fileNames):
     commonTracks = set.intersection(*trackNameSets)
     # 将运算结果写入文本文件中
     if len(commonTracks) > 0:
-        f = open("common.txt","w")
+        f = open("common.txt","wb+")
         for val in commonTracks:
-            s = " " + val + " /n"
+            s = " " + val + " \n"
             f.write(s.encode("UTF-8"))
         f.close()
         print("" + str(len(commonTracks)) + "common tracks found."
-             + "/n Track names written to common.txt.")
+             + "\nTrack names written to common.txt.")
     else:
         print("No common trakcs!")
 
