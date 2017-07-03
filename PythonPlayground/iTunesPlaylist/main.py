@@ -18,6 +18,10 @@ def main():
 
     # 添加存入解析值的参数变量名
     # 分别键入三个处理函数的解析值参数
+    # 该部分详见evernote/jercas0618@163.com
+    # nargs表示该参数可处理（？——'1个/不需要'、+——'多余一个'、*——'任意个'、n——'指定个数'）键入值
+    # dest相当于把 该参数关联到一个特点名词，可理解为 common=plFiles,stats=plFile,dup=plFileD
+    # 故下文选择参数判断时，所用的是arg.plFiles而非arg.common
     group.add_argument('--common',nargs='*',dest='plFiles',required=False)
     group.add_argument('--stats',dest='plFile',required=False)
     group.add_argument('--dup',dest='plFileD',required=False)
