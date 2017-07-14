@@ -102,6 +102,35 @@ def addGlider(i,j,grid):
     glider = np.array([[0,0,255],[255,0,255],[0,255,255]])
     grid[i:i+3,j:j+3] = glider
 
+# 生成高斯帕滑翔机枪图案函数
+def addGosperGun(i, j, grid):
+    """以指定(i,j)坐标为左上角，添加一个高斯帕滑翔机枪图案"""
+    gun = np.zeros(11 * 38).reshape(11, 38)
+
+    gun[5][1] = gun[5][2] = 255
+    gun[6][1] = gun[6][2] = 255
+
+    gun[3][13] = gun[3][14] = 255
+    gun[4][12] = gun[4][16] = 255
+    gun[5][11] = gun[5][17] = 255
+    gun[6][11] = gun[6][15] = gun[6][17] = gun[6][18] = 255
+    gun[7][11] = gun[7][17] = 255
+    gun[8][12] = gun[8][16] = 255
+    gun[9][13] = gun[9][14] = 255
+
+    gun[1][25] = 255
+    gun[2][23] = gun[2][25] = 255
+    gun[3][21] = gun[3][22] = 255
+    gun[4][21] = gun[4][22] = 255
+    gun[5][21] = gun[5][22] = 255
+    gun[6][23] = gun[6][25] = 255
+    gun[7][25] = 255
+
+    gun[3][35] = gun[3][36] = 255
+    gun[4][35] = gun[4][36] = 255
+
+    grid[i:i + 11, j:j + 38] = gun
+
 # 刷新游戏图像
 def update(frameNum,img,grid,N):
     # 复制网格进行遍历，根据每个'细胞'周遭邻居情况以对应法则判断其存活情况
@@ -137,7 +166,7 @@ def main():
     parser.add_argument('--interval', dest='interval', required=False)
     parser.add_argument('--glider', action='store_true', required=False)
     parser.add_argument('--movfile',dest='movfile',required=False)
-    parser.add_argument('--gosper',action='store_true',required=False)
+    parser.add_argument('--gosperGun',action='store_true',required=False)
     # 提交解析，返回前台具体输入命令
     args = parser.parse_args()
 
@@ -155,11 +184,15 @@ def main():
 
     # 判断网格创建方式,首先先创建一个空的数组对象表示网格
     grid = np.array([])
-    # 用户输入glider标识,添加滑翔机图像进入网格
+    # 用户输入glider标识,添加滑翔机图像进入网格进行模拟
     if args.glider:
         grid = np.zeros(N*N).reshape(N,N)
         addGlider(1,1,grid)
-    # 用户未输入,随机值创建网格
+    # 用户输入gosper标识,添加高斯帕滑翔机枪图像进入网格进行模拟
+    elif args.gosperGun:
+        grid = np.zeros(N*N).reshape(N,N)
+        addGosperGun(1,1,grid)
+    # 用户未输入,随机值创建网格进行模拟
     else:
         grid = randomGrid(N)
 
